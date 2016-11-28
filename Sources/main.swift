@@ -21,11 +21,61 @@ import PerfectLib
 import PerfectHTTP
 import PerfectHTTPServer
 
+// Settings path vars.
+#if os(Linux)
+let FileRoot = "/home/ubuntu/settings/"
+#else
+let FileRoot = ""
+#endif
+
+// base route for the API
+let apiRoute = "/api/v1/"
+// config for the server port
+let httpPort = 8181
+// fetch the token from the ApplicationConfiguration.json file
+let apiToken = getToken()
+
 // 创建HTTP服务器
 let server = HTTPServer()
 
 // 注册自定义路由和页面句柄
 var routes = Routes()
+
+routes.add(method: .get, uris: ["\(apiRoute)current/","/api/v1/current/{country}/{city}"], handler:{
+    request, response in
+    
+    // set country and city from URI variables
+    let country = request.urlVariables["country"] ?? "Canada"
+    let city = request.urlVariables["city"] ?? "Newmarket"
+    
+    // Setting the response content type explicitly to application/json
+    response.setHeader(.contentType, value: "application/json")
+    // Setting the body response to the JSON list generated
+    response.appendBody(string: Weather.getCurrent("\(country)/\(city)"))
+    //Signalling that the request is completed
+    response.completed()
+}
+)
+
+routes.add(method: .get, uris: ["\(apiRoute)forecast","/api/v1/forecast/{country}/{city}"], handler:{
+    request, response in
+    
+    // set country and city from URI variables
+    let country = request.urlVariables["country"] ?? "Canada"
+    let city = request.urlVariables["city"] ?? "Newmarket"
+
+    // Setting the response content type explicitly to application/json
+    response.setHeader(.contentType, value: "application/json")
+    // Setting the body response to the JSON list generated
+    response.appendBody(string: Weather.getForecast("\(country)/\(city)"))
+    // Signalling that the request is completed
+    response.completed()
+}
+)
+
+
+
+//页面句柄
 routes.add(method: .get, uri: "/", handler: {
     request, response in
     response.appendBody(string: "<html><head><meta http-equiv='content-type' content='text/html;charset=utf-8'><title>你好，世界！</title></head><body>你好，世界！</body></html>")
@@ -37,7 +87,7 @@ routes.add(method: .get, uri: "/", handler: {
 server.addRoutes(routes)
 
 // 监听8181端口
-server.serverPort = 8181
+server.serverPort = 8181   //UInt16(httpPort)
 
 // 设置文档根目录。
 // 这个操作是可选的，如果没有静态页面内容则可以忽略这一步。
