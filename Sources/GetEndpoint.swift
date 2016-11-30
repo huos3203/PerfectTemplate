@@ -48,12 +48,14 @@ func getEndpoint(endpoint: String, args: [String], token: String, header: String
 
 	curlObject.close()
 	do {
+        //bytes转String
 		let str = UTF8Encoding.encode(bytes: body)
+        print("json解析：\(str)")
+        //String转json再转字典
 		let decoded = try str.jsonDecode() as? [String:Any]
 		returning = decoded!
 	} catch {
 		print("Decode error: \(error)")
 	}
-
 	return returning
 }

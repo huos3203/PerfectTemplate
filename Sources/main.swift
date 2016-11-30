@@ -118,6 +118,8 @@ server.documentRoot = "./webroot"
 // 如果调用时在命令行参数，而且该参数在配置文件中也有说明，则命令行参数的值会取代配置文件。
 configureServer(server)
 
+//启动服务奔溃文Cannot delete nova network - network address already in use (no active instance)
+//解决办法：打开 Activity Monitor 搜索PerfectTemplate，强制退出该进程，重新run即可
 do {
     // 启动HTTP服务器
     try server.start()
