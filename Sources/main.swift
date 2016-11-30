@@ -35,7 +35,7 @@
  以上涉及到的各种属性和函数都是HTTPRequest请求协议的部分内容。
  
  */
-
+import Foundation
 import PerfectLib
 import PerfectHTTP
 import PerfectHTTPServer
@@ -94,7 +94,29 @@ routes.add(method: .get, uris: ["\(apiRoute)forecast","/api/v1/forecast/{country
 }
 )
 
-
+//me
+routes.add(method: .post, uris: ["HostMonitor/client/log/addLog"]){
+    (request,response) in
+    
+    //解析请求数据
+    let dic = request.params()[0]  //[(String,String)]:元组数组，解析拼接完整数据
+    let strr = "\(dic.0)\(dic.1)"
+    do {
+        //String转json再转字典
+        let decoded = try strr.jsonDecode() as? [String:Any]
+        print(decoded!)
+    } catch {
+        print("Decode error: \(error)")
+    }
+    
+    //设置响应数据
+    // Setting the response content type explicitly to application/json
+    response.setHeader(.contentType, value: "application/json")
+    // Setting the body response to the JSON list generated
+    response.appendBody(string: strr)   //此处是原数据返回
+    // Signalling that the request is completed
+    response.completed()
+}
 
 //页面句柄
 routes.add(method: .get, uri: "/", handler: {
