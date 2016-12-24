@@ -39,7 +39,7 @@ import Foundation
 import PerfectLib
 import PerfectHTTP
 import PerfectHTTPServer
-import PerfectRequestLogger
+//import PerfectRequestLogger
 
 // Settings path vars.
 #if os(Linux)
@@ -130,12 +130,12 @@ routes.add(method: .get, uri: "/", handler: {
 server.addRoutes(routes)
 
 // 初始化一个日志记录器
-let myLogger = RequestLogger()
+//let myLogger = RequestLogger()        
 // 增加过滤器
 // 首先增加高优先级的过滤器
-server.setRequestFilters([(myLogger, .high)])
+//server.setRequestFilters([(myLogger, .high)])
 // 最后增加低优先级的过滤器
-server.setResponseFilters([(myLogger, .low)])
+//server.setResponseFilters([(myLogger, .low)])
 
 // 监听8181端口
 server.serverPort = 8181   //UInt16(httpPort)
