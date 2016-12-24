@@ -16,18 +16,18 @@ class Weather {
 		let data = getEndpoint(endpoint: "conditions/q/\(location).json", args: [], token: apiToken)
 		
         var trimmedData = [String:Any]()
-        if false
-        {
-            let current_observation = data["current_observation"] as! [String: Any]
-            
-            trimmedData["observation_time"]		= current_observation["observation_time"]
-            trimmedData["weather"]				= current_observation["weather"]
-            trimmedData["temperature_string"]	= current_observation["temperature_string"]
-        }
-        else
-        {
+//        if false
+//        {
+//            let current_observation = data["current_observation"] as! [String: Any]
+//            
+//            trimmedData["observation_time"]		= current_observation["observation_time"]
+//            trimmedData["weather"]				= current_observation["weather"]
+//            trimmedData["temperature_string"]	= current_observation["temperature_string"]
+//        }
+//        else
+//        {
             trimmedData = data
-        }
+//        }
         
 		do {
 			return try trimmedData.jsonEncodedString()
