@@ -16,6 +16,8 @@
 //
 //===----------------------------------------------------------------------===//
 //
+// swift-tools-version:4.0
+
 /*
  SPM:软件包管理器编译项目
     https://github.com/PerfectlySoft/PerfectDocs/blob/master/guide.zh_CN/buildingWithSPM.md
@@ -43,13 +45,27 @@
 import PackageDescription
 
 let package = Package(
+//    name: "PerfectTemplate",
+//    targets: [],
+//    dependencies: [
+//        .Package(url: "https://github.com/PerfectlySoft/Perfect-HTTPServer.git", majorVersion: 2, minor: 0),
+//        .Package(url: "https://github.com/PerfectlySoft/Perfect-CURL.git", majorVersion: 2, minor: 0),
+//        .Package(url: "https://github.com/iamjono/JSONConfig.git", majorVersion: 0, minor: 1),
+//        .Package(url: "https://github.com/PerfectlySoft/Perfect-libcurl.git", majorVersion: 2, minor: 0),
+////        .Package(url: "https://github.com/dabfleming/Perfect-RequestLogger.git", majorVersion: 0)
+//    ]
+
 	name: "PerfectTemplate", // 当前项目的目标名称，可执行文件的名字也会按照这个名称进行编译。
-	targets: [],
+	products: [
+		.executable(name: "PerfectTemplate", targets: ["PerfectTemplate"])
+	],
 	dependencies: [
-		.Package(url: "https://github.com/PerfectlySoft/Perfect-HTTPServer.git", majorVersion: 2, minor: 0),
-        .Package(url: "https://github.com/PerfectlySoft/Perfect-CURL.git", majorVersion: 2, minor: 0),
-		.Package(url: "https://github.com/iamjono/JSONConfig.git", majorVersion: 0, minor: 1),
-		.Package(url: "https://github.com/PerfectlySoft/Perfect-libcurl.git", majorVersion: 2, minor: 0),
-//        .Package(url: "https://github.com/dabfleming/Perfect-RequestLogger.git", majorVersion: 0)
-    ]
+		.package(url: "https://github.com/PerfectlySoft/Perfect-HTTPServer.git", from: "3.0.0"),
+        .Package(url: "https://github.com/PerfectlySoft/Perfect-CURL.git", from: 2),
+        .Package(url: "https://github.com/iamjono/JSONConfig.git", from: 0),
+        .Package(url: "https://github.com/PerfectlySoft/Perfect-libcurl.git", from: 2),
+	],
+	targets: [
+		.target(name: "PerfectTemplate", dependencies: ["PerfectHTTPServer"])
+	]
 )
