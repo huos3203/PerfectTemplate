@@ -148,7 +148,7 @@ server.documentRoot = "./webroot"
 // 逐个检查命令行参数和服务器配置
 // 如果用命令行执行带 --help 参数的服务器可执行程序，就可以看到所有可以选择的参数。
 // 如果调用时在命令行参数，而且该参数在配置文件中也有说明，则命令行参数的值会取代配置文件。
-configureServer(server)
+//configureServer(server)
 
 //启动服务奔溃文Cannot delete nova network - network address already in use (no active instance)
 //解决办法：打开 Activity Monitor 搜索PerfectTemplate，强制退出该进程，重新run即可
