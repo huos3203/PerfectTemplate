@@ -39,6 +39,7 @@ import Foundation
 import PerfectLib
 import PerfectHTTP
 import PerfectHTTPServer
+import cURL
 //import PerfectRequestLogger
 
 // Settings path vars.
