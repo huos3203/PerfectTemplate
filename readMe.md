@@ -121,3 +121,17 @@ swift build
 
 此时服务器就运行了，随时等待网络连接！🎉 从浏览器打开[http://localhost:8181/](http://127.0.0.1:8181/)就可以看到欢迎信息。在终端控制台上用组合键“control-c”可以随时停止服务器。
 
+
+*** github 扩展
+**** Package [[https://docs.github.com/cn/packages][GitHub 包文档 - GitHub Docs]]
+1. 使用 docker 登录命令验证 github：
+   $ cat ~/.gist | docker login https://docker.pkg.github.com -u it-boyer --password-stdin
+2. push 发布包
+   $ docker push docker.pkg.github.com/OWNER/REPOSITORY/IMAGE_NAME:VERSION
+3. pull 安装包
+   $ docker pull docker.pkg.github.com/OWNER/REPOSITORY/IMAGE_NAME:TAG_NAME
+
+**** Action [[https://docs.github.com/cn/actions][GitHub 操作文档 - GitHub Docs]]
+
+***** [[https://docs.github.com/cn/actions/configuring-and-managing-workflows][配置和管理工作流程 - 工作流程]]
+***** [[https://docs.github.com/cn/actions/language-and-framework-guides/publishing-docker-images][发布 Docker 映像 - 语言和框架指南 ]]
